@@ -117,3 +117,38 @@ WantedBy=multi-user.target # required for service to run at startup.
 
 - Forwarding port from host machine to guest machine.
 - Configurations are done in VM's network settings.
+
+## Vagrant
+
+- Vagrant is a tool for building and managing virtual machine development environments in a single workflow.
+- Boxes are the package format for Vagrant environments. They are available in [public Vagrant box catalog](https://app.vagrantup.com/boxes/search).
+- `vagrant init centos/7` - Initialize a Vagrantfile in the current directory.
+- `vagrant up` - Creates the environment.
+- `vagrant reload` - After changing the configuration in Vagrantfile, reload is used.
+- `vagrant halt` - For stopping the VM.
+- `vagrant ssh` - To SSH to the VM. Uses VM portforwarding and SSH based keys for auth.
+
+### Vagrantfile
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vm.network "forwarded_port", guest: 80, host:8080
+  config.vm.synced_folder "../data", "vagrant_data"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "1024"
+  end
+  config.vm.provision "shell", inline: <<-SHELL
+    yum update
+    yum install -y httpd
+  SHELL
+end
+```
+
+## Vagrant Providers
+
+- Virtualbox
+- VMware
+- Hyper-V
+- Docker
+- Custom
