@@ -152,3 +152,43 @@ end
 - Hyper-V
 - Docker
 - Custom
+
+## Networking Basics
+
+### Switching
+
+- A switch connects machines to same network and enable communication between the machines.
+- `ip link` command used to identify the network interface in the machine.
+
+### Routing
+
+- Router helps to connect two network together.
+
+### Gateway
+
+- `route` or `ip route` command is used to check the IP routing table in the machine.
+- `ip route add 192.168.2.0/24 via 192.168.1.1` is used to add a Gateway entry in routing table.
+- `ip route add default via 192.168.2.1` - Adding default gateway route entry. Helps to reach any IP out of current network.
+- `0.0.0.0` can be used instead of `default`.
+
+| Note                                                                                                           |
+| :------------------------------------------------------------------------------------------------------------- |
+| When facing internet related issues, it is best to start checking the route table and Default gateway entries. |
+
+![Network routing](images/network-routing.png?raw=true 'Network Routing')
+
+```
+# To ping from machine A to C vice-versa.
+
+# In machine A
+ip route add 192.168.3.0/24 via 192.168.2.4
+
+# In machine C
+ip route add 192.168.2.0/24 via 192.168.3.3
+
+# In machine B
+echo 1 > /proc/sys/net/ipv4/ip_forward
+# To make the changes persist.
+# /etc/sysctl.conf
+# net.ipv4.ip_forward = 1
+```
