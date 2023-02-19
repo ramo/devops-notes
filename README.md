@@ -192,3 +192,32 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 # /etc/sysctl.conf
 # net.ipv4.ip_forward = 1
 ```
+
+## DNS
+
+- `/etc/hosts` file is used for name resolution (Name to IP).
+- DNS server is a centralized way of name resolution instead of adding entries to /etc/hosts file of all machines on the network.
+- `/etc/resolv.conf` file has DNS `nameserver` entry.
+- By default `/etc/hosts` file takes priority in name resolution. This is decided based on `/etc/nsswitch.conf` file. (`hosts: files dns`)
+- Unknown DNS requests can be forwarded from corporate DNS server to global DNS servers like `8.8.8.8`.
+- `nslookup` and `dig` commands are used to test DNS name resolution. These directly query the nameserver and doesn't care about the entries in the `/etc/hosts` file.
+
+### Domain Names
+
+- `.` - Root
+- `.com` - Top Level Domain Name
+- `google` - Domain name
+- `mail`, `maps` - Subdomain.
+
+### Search Domain
+
+- `search` directive in `/etc/resolv.conf` file is uesd for providing search domains.
+- Eg. `search mycompany.com` entry would help resolve `ping web` query to `ping web.mycompany.com`
+
+### Record Types
+
+| Type  |                 |                                        |
+| ----- | --------------- | -------------------------------------- |
+| A     | web-server      | 192.168.1.1                            |
+| AAAA  | web-server      | 2001:db8:3333:4444:5555:6666:7777:8888 |
+| CNAME | food.web-server | eat.web-server                         |
