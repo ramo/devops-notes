@@ -221,3 +221,79 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 | A     | web-server      | 192.168.1.1                            |
 | AAAA  | web-server      | 2001:db8:3333:4444:5555:6666:7777:8888 |
 | CNAME | food.web-server | eat.web-server                         |
+
+## Application Basics
+### Java
+- Free, Open-Source, Huge community
+- Java versions <=8 uses version name convention like 1.8, 1.7, etc. From 9 onwards this got changed. 
+- `JDK` - Java Development Kit. `JRE` - Java Runtime Environment.
+- Before version 9, the JDK and JRE can be installed separately. Now JRE is part of the JDK.
+- Develop - `jdb` `javadoc`
+- Build - `javac` `jar`
+- Run - `java`
+- JDK under GPL license available from Oracle https://jdk.java.net/archive/
+
+#### Java - Build & Packaging
+- Develop Source Code > Compile `javac MyClass.java` > Run `java MyClass`
+- Java source code is compiled by `javac` to produce byte code which runs on JVM (Java Virtual Machine).
+- Develop once and run anywhere. 
+- Package - `JAR` (Java Archive), `WAR` (Web Archive).
+- In a Jar file, `META-INF/MANIFEST.MF` file has information about the entrypoint (Main-Class) of the application. 
+- `jar cf MyApp.jar MyClass.class Service1.class Service2.class ...`
+- `java -jar MyApp.jar`
+- Documentaion - `javadoc -d doc MyClass.java`
+- Build Process - Develop, Compile, Package, Document.
+- Build Tools - `Maven`, `Gradle`, `Ant` - Helps manage the complexities in the build process.
+
+### NodeJS
+- Server side Javascript framework.
+- Supports many concurrent connections using non blocking I/O model.
+- Free, OpenSource and Cross Platform Compatible.
+- `node -v` to see the version of the nodeJS.
+- `node add.js` to run the javascript program.
+
+#### NPM (Node Package Manager)
+- Reusable node packages available in the NPM repository.
+- `npm -v`
+- `npm search file` - Search for a NPM package.
+- `npm install file` - Install a NPM package in current directory.
+- `package.json` - Every node module contains this file to show the dependencies of that module.
+- `node -e "console.log(module.paths)"` - List the modules path in which node looks for NPM packages.
+- `npm install file -g` - Install the package globally.
+- Built-In Modules `/usr/lib/node_modules/npm/node_modules`
+  - `fs` - To handle filesystem
+  - `http` - To host an HTTP server
+  - `os` - To work with the Operating System.
+  - `events` - To handle events.
+  - `tls` - To implement TLS and SSL.
+  - `url` - To parse URL strings.
+- External Modules `/usr/lib/node_modules`
+  - `express` - Fast, Unopinionated, minimalist web framework.
+  - `react` - To create user interafaces.
+  - `debug` - To debug applications.
+  - `async` - To work with asynchronous JS.
+  - `lodash` - To work with arrays, objects, strings etc.
+
+
+### Python
+- Free, Open source and Cross platform compatible.
+- Python2 - (2000 - 2010), Python3 - (2008 to present).
+- `python2` invokes the python2 interpretor.
+- `python3` invokes the python3 interpretor.
+
+#### pip (Python Package Manager)
+- `pip2` and `pip3` corresponding to python2 and python3.
+- `pip install flask` - Install a package.
+- `/usr/lib/python{x.y}/site-packages` & `/usr/lib64/python{x.y}/site-packages`
+- `pip show flask` - shows the package location.
+- `python -c "import sys; print(sys.path)"` - Path where python looks for the packages.
+- `pip install -r requirements.txt` 
+- `pip install flask --upgrade` - upgrade a package.
+- `pip uninstall flask` - Uninstall a package.
+
+#### Other Package Managers
+- easy_install
+  - `app.py` ->(setuptools) -> `app.egg` - `easy_install install app`
+- wheel
+  - `app.py` ->(setuptools) -> `app.whl` - `pip install app.whl`
+
