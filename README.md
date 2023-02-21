@@ -297,3 +297,79 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 - wheel
   - `app.py` ->(setuptools) -> `app.whl` - `pip install app.whl`
 
+
+## Source Control Management (SCM)
+### GIT
+- What changes were made by whom and when?
+- version control system.
+- `git init` - Initialize a GIT repository. `.git` directory is created.
+- `git status` - Checks the status of GIT repository.
+- `git add <List of files>` - configure files to track, Stage changes.
+- `git commit -m "Commit message"` - Commits the changes to Local GIT repository.
+
+### GIT - Remote Repositories
+- A central place to push/pull changes from local GIT repositories.
+- `GitHub` `GitLab` are example remote GIT repositories. It is possible to run our own GIT remote server as well.
+- Before pushing the changes to remote repositories, it needs to be created. GitHub provides web interface to do that.
+- `git remote add <name> <url>` - Adding remote repository to local. Name could be anything. 
+- `git push -u <name> <branch>` - Pushing the local changes to remote repository. `-u` is required when pushing for the first time after adding the remote using `git remote add`
+- `git clone <repo url>` - First time cloning the remote repository to local. For this local repo the remote will be added automatically. 
+- `git remote -v` - Command to check the remote of the repository.
+- By default, `origin` is the remote name of the remote repository. It represents `original`.
+- `git pull` - Command to pull the latest changes from remote repository to local.
+
+| Note |
+|:-----|
+| Bare repository is used for creating remote repositories locally. `--bare` flag is used with either `init` or `clone` command to create the bare repository.|
+
+## Web Servers
+- Backend web applications - Java, NodeJS, Python.
+- FrondEnd application - HTML, Javascript, CSS.
+- Web servers can host multiple applications at same time.
+- Static websites - Only uses static content.
+- Dynamic websites - Connects with DB, etc and provide dynamic content to users. 
+- Static web servers refer as web servers - Nginx, Apache.
+- Dynamic web servers refer as application servers - Tomcat, Gunicorn, uWSGI.
+
+### Apache Web server
+- OpenSource web server.
+- `yum install httpd` - Install httpd
+- `service httpd start` - Start the httpd service.
+- `service httpd status` - Check the status of the httpd service.
+- `firewall-cmd --permanent --add-service=http`
+- Log files - `/var/log/httpd/access_log` and `/var/log/httpd/error_log` 
+- Config file - `/etc/httpd/conf/httpd.conf`. `Include` directive is used to include external configuration files to the main httpd.conf file.
+- `VirtualHost` - For hosting different websites on the same machine. 
+
+### Apache Tomcat
+- Java is a Prerequisite.
+- In production installation `tomcat` user is created and Apache tomcat is installed as a service.
+- `server.xml` in the conf directory has entry for `Connector`, which defines the tomcat port,etc.
+- `logs` directory will have logs.
+- `war` files are deployed in the `webapps` directory of the tomcat server.
+-  `catalina.out` logs will show the status of the app deployment.
+
+### Python - Deploy Flask App
+- `python main.py` will start the development flask server. 
+- Production deployments
+  - Gunicorn - `gunicorn main:app -w 2` - Default 1 worker. 
+  - uWSGI
+  - Gevent
+  - Twisted Web
+
+### NodeJS - Deploy Express App
+- `npm install` and then `node app.js` to start the application.
+- `package.json` has a scripts section these script can be invoked by `npm run <script>`
+- `npm run start` - used for starting the application instead of `node app.js`
+- `supervisord`, `forever` and `pm2` can be used to ensure the node servers are running continously. Otherwise if the application crashes for some reason.
+- `pm2 start app.js -i 4` - runs 4 instance of the application server load balanced.
+- `pm2 delete app.js` - Removes the application from pm2.
+
+### IPs and Ports
+- Application can be made to listen to a port of specific network interface or all network intefaces. (All IPs or specific IPs).
+- In Flask app, `app.run(port=5000, host="0.0.0.0")` wil make the app to listen to all IPs. If `host` is not mentioned, only listen to loopback interface (localhost).
+
+## Database Basics
+## Security
+## General Pre-Requisites
+## 2 Tier Applications
