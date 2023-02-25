@@ -368,8 +368,61 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 ### IPs and Ports
 - Application can be made to listen to a port of specific network interface or all network intefaces. (All IPs or specific IPs).
 - In Flask app, `app.run(port=5000, host="0.0.0.0")` wil make the app to listen to all IPs. If `host` is not mentioned, only listen to loopback interface (localhost).
+- In tomcat `address` attribute of `Connector` configuration is used for similar settings as above.
 
 ## Database Basics
+- `SQL` - Tabular/Relational 
+  - Row, Table
+  - `select * from persons where AGE > 10`
+  - MySQL, PostgreSQL, Microsoft SQL Server
+- `NoSQL` 
+  - Document, Collection
+  - `db.persons.find( { age: { $gt: 10 } } )`
+  - mongoDB, DynamoDB, cassandra
+
+### MySQL
+- Open Source, Fast, Reliable, SQL
+- Both community(free) and Commercial edition available.
+- `3306` - default port
+- `/var/log/mysqld.log` - log file
+
+#### Privileges
+```
+mysql> GRANT <PERMISSION> ON <DB.TABLE> TO 'john'@'%';
+```
+
+| Privileges ||
+|----|-----|
+|ALL PRIVILEGES|Grant all access|
+|CREATE|Create databases|
+|DROP|Delete databases|
+|DELETE|Delete rows from table|
+|INSERT|Insert rows into table|
+|SELECT|Read/Query table|
+|UPDATE|Update rows in table|
+
+Give Read/Query table permission of `persons` table in `school` database to user `john`.
+```
+mysql > GRANT SELECT ON school.persons TO 'john'@'%';
+```
+
+```
+mysql > GRANT SELECT, UPDATE ON school.persons TO 'john'@'%';
+```
+
+```
+mysql > GRANT SELECT, UPDATE ON school.* TO 'john'@'%';
+```
+
+```
+mysql > GRANT ALL PRIVILEGES ON *.* TO 'john'@'%';
+```
+
+```
+mysql > SHOW GRANTS FOR 'john'@'localhost';
+```
+
+
 ## Security
 ## General Pre-Requisites
 ## 2 Tier Applications
